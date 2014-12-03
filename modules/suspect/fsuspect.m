@@ -1,12 +1,10 @@
 function fsuspect( sig,BPM0,n )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-    Fs = 125;
-    window = 1000;
-    
+    global window Fs
    
    
-   if size(sig,1) > 1 && size(sig,2) > 1000
+   if size(sig,1) > 1 && size(sig,2) > window
         frame = getFrame(sig,n);
         ppg1 = frame(2,:);
    elseif size(sig,1) == 1
@@ -16,9 +14,9 @@ function fsuspect( sig,BPM0,n )
         ppg1 = frame(2,:);
    end
    figure;
-   x = 0:Fs/window:125-Fs/window;
+   x = 0:Fs/window:Fs-Fs/window;
    fppg = abs(fft(ppg1));
-   plot(x(1:500),fppg(1:500),'b');
+   plot(x(1:window/2),fppg(1:window/2),'b');
    hold on;
    hr = BPM0(n)/60;
    
