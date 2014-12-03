@@ -1,4 +1,4 @@
-function pfsuspect( sig,BPM0,n )
+function pfsuspect( sig,BPM0,n ,r)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
     Fs = 125;
@@ -16,7 +16,7 @@ function pfsuspect( sig,BPM0,n )
    end
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    
-   ppg1 = wavelet_process(ppg1,1.5);
+   ppg1 = wavelet_process(ppg1,r);
    
    
    
