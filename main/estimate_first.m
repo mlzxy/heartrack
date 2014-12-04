@@ -62,7 +62,7 @@ elseif length(wp) < 3
     wpHR = closest_to(magHR,wp,1);
     hr = magHR;
 else
-    wpHR = mean(closest_to(magHR,wp,2));
+    wpHR = mean(closest_to(magHR+Fs/window/1.5,wp,2));
     hr = wpHR;
 end
 
