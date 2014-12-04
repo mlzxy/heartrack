@@ -2,27 +2,31 @@
 function [estm] = main(dataNum)
 
 init;
+membound = 0.15;
 sig = Sig{dataNum};
 hr = Hr{dataNum};
 PPG1 = 2;
 PPG2 = 3;
 
 %%%%%%%%%%%%%%
-r = [0.3,0.8,1.5];
+r = [0.1,0.8,1.5];
 lowb = 0.5;
 highb = 3;
 %%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%
-lenr = length(r);
+
 lenpg = 2;
 
 
 %%%%%%%%%%%%%%%%%%%%%%
 fnumber = frameNum(sig);
 estm = zeros(1,fnumber);
+%%%
+%fnumber = 100;
 for i = 1:fnumber
+    lenr = length(r);
     frame = getFrame(sig,i);
     ppg = [frame(PPG1,:);frame(PPG2,:)];
     ppg_m = cell(2,lenr);
@@ -46,14 +50,16 @@ for i = 1:fnumber
             peaks{k,j} = temp;
         end
     end
-    estm(i) = estimate(peaks,estm,i);
-    
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    estm(i) = estimate(peaks,estm,i,membound);
+
 end
 
 hold on;
-plot(hr/60,'b*');
-plot(estm,'r*');
+plot(hr(1:fnumber)/60,'b*');
+plot(estm(1:fnumber),'r*');
 legend('true heartrate','estimated heartrate');
-printError(estm,hr/60);
+printError(estm(1:fnumber)',hr(1:fnumber)/60);
 
 end
