@@ -10,7 +10,8 @@ for i=1:size(peakx,1)
         p = peakx{i,j};
         len = length(p.peaki);
         peaki = p.peaki;
-        peakm = toRank(p.peakm);
+        peakm = p.peakm;
+        peakm = toRank(peakm);
         for k = 1:len
             x = hmap.get(peaki(k));
             x(end+1) = peakm(k);
@@ -39,24 +40,33 @@ freqD = [feqc{1}(I1),feqc{2}(I2)];
 if freqD(1) == freqD(2)
    magHR = freqD(1);
 else
-    if freqD(2)>freqD(1)
-        magHR = freqD(1)+Fs/window/1.5;
-    else
-        magHR = freqD(1)-Fs/window/1.5;
-    end
+   magHR = mixfeq(freqD(1),freqD(2));
 end
 
 
 %% based on the super power of wavelet 
 wp = cell(1,2);
 for i=1:size(peakx,1)
+   wl = [];
    for j=2:size(peakx,2)
-      s = setdiff(peakx{i,j},peakx{i,j-1});
-      wl = selectNew(s,peakx{i,j});
+      s = setdiff(peakx{i,j}.peaki,peakx{i,j-1}.peaki);
+      wl = [wl, selectNew(s,peakx{i,j}.peaki)];
    end
    wp{i} = wl;
 end
 
+wp = [wp{1},wp{2}];
+if isempty(wp)
+    hr = magHR;
+elseif length(wp) < 3
+    wpHR = closest_to(magHR,wp,1);
+    hr = magHR;
+else
+    wpHR = mean(closest_to(magHR,wp,2));
+    hr = wpHR;
+end
+
+%error:1,2,5,6,7,8,9
 
 end
 
