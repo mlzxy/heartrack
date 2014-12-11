@@ -6,6 +6,7 @@ if isempty(count)
     stillcount = 1;
 end
 count = count +1;
+ppg1 = 1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -32,19 +33,27 @@ end
 freqM = magDecision(peaktc);
 [freqC,magC,distC] = closeDecision(peak,prev_hr);
 [freqW1, freqW2]= wpDecision_dual(peak);
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
 
 if isempty(freqM) 
     hr = prev_hr;    
+    stillcount = stillcount + 1;
     return;
 end
 
 %%%mixin
-if ismember(prev_hr,freqM)
+freqM = freqM(ppg1);
+
+if prev_hr ~= freqM
     hr = freqM(1)*0.8 + prev_hr*0.2;
 else
-    hr = freqM(1);
+    hr = prev_hr;
 end
 
 end
