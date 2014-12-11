@@ -24,6 +24,7 @@ function pfsuspect( sig,BPM0,n ,r)
    x = 0:Fs/window:Fs-Fs/window;
    fppg = abs(fft(ppg1));
    plot(x(1:window/2),fppg(1:window/2),'b');
+   legend('after wavelet');
    hold on;
    hr = BPM0(n)/60;
    
