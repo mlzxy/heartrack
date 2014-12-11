@@ -1,4 +1,4 @@
-function [ freqC,peakC,DistC ] = closeDecision( peaks,prev_hr)  
+function [ freqC,DistC ] = closeDecision( peaks,prev_hr)  
 % choose the peaks that be close to prev_hr
     freqC = [];
     peakC = [];
@@ -12,5 +12,9 @@ function [ freqC,peakC,DistC ] = closeDecision( peaks,prev_hr)
     [DistC,I] = sort(DistC);
     peakC = peakC(I);
     freqC = freqC(I);
+    
+    [freqC,I] = unique(freqC);
+    DistC = DistC(I);
+    [DistC,I] = sort(DistC);
+    freqC = freqC(I);
 end
-
