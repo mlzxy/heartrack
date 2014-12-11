@@ -4,7 +4,7 @@ function [ hr ] = estimate( peakx,estm,idx,b )
     if idx == 1
         hr = estimate_first(peakx);
     else
-        hr = estimate_mem(peakx,estm(idx-1),b);
+        hr = estimate_next(peakx,estm(idx-1),b);
     end
 end
 

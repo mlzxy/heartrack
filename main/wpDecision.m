@@ -11,7 +11,5 @@ for i=1:size(peakx,1)
    wp{i} = wl;
 end
 wp = [wp{1},wp{2}];
-
-
 end
 

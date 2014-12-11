@@ -1,16 +1,19 @@
-function [ hr ] = estimate_mem( peak,prev_hr,bound )
+function [ hr ] = estimate_next( peak,prev_hr,bound )
 %UNTITLED6 Summary of this function goes here
 %   Detailed explanation goes here
 %%%%%
 %%%only use the peaks when r == max
-persistent count;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+persistent count stillcount;
 if isempty(count)
     count = 1;
+    stillcount = 0;
 end
 count = count +1;
-% peakx = cell(2,1);
-% peakx{1,1} = peak{1,end};
-% peakx{2,1} = peak{2,end};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 peakx = cell(2,3);
 
 hb = prev_hr + bound;
@@ -31,12 +34,22 @@ for i=1:size(peak,1)
     end
 end
 
-freqD = magDecision(peakx);
+% freqcell = cell(1,3);
+% for i=1:3
+%    freqcell{i} = magDecision(peakx(:,i));
+% end
+freqM = magDecision(peakx);
+freqC = [];
+magC = [];
+for i = 1:3
+    feqpekC = closeDecision(peakx(:,i),prev_hr);
+end
+freqW = wpDecision(peak);
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if isempty(freqD) 
-    hr = prev_hr;
+    hr = prev_hr;    
     return;
 end
 
