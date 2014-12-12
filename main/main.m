@@ -1,7 +1,6 @@
 
 function [estm,err] = main(dataNum)
-
-close all;
+hold off;
 init;
 membound = 0.15;
 sig = Sig{dataNum};
@@ -24,6 +23,7 @@ lenpg = 2;
 %%%%%%%%%%%%%%%%%%%%%%
 fnumber = frameNum(sig);
 estm = zeros(1,fnumber);
+hrpeak = zeros(1,fnumber);
 %%%
 %fnumber = 100;
 for i = 1:fnumber
@@ -53,8 +53,8 @@ for i = 1:fnumber
     end
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    estm(i) = estimate(peaks,estm,i,membound);
-
+    [estm(i),hrpeak(i)] = estimate(peaks,estm,hrpeak,i,membound);
+    
 end
 
 hold on;
@@ -63,5 +63,5 @@ plot(estm(1:fnumber),'r*');
 legend('true heartrate','estimated heartrate');
 fprintf('Data set No %d: ',dataNum);
 err = printError(estm(1:fnumber)',hr(1:fnumber)/60);
-
+hold off;
 end

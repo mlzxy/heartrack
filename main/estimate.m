@@ -1,10 +1,11 @@
-function [ hr ] = estimate( peakx,estm,idx,b )
+function [ hr,hrpeak ] = estimate( peakx,estm,hrpeak,idx,b )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
     if idx == 1
         hr = estimate_first(peakx);
+        hrpeak = hr;
     else
-        hr = estimate_next(peakx,estm(idx-1),b);
+        [hr,hrpeak] = estimate_next(peakx,estm(idx-1),hrpeak(idx-1),b);
     end
 end
 

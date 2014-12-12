@@ -1,4 +1,4 @@
-fnum = 22;
+fnum = 24;
 r = 0.3;
 whichone = [1];
 load('/home/beviszhang/Documents/WorkSpace/newIEEE/data/alldata.mat');
