@@ -1,6 +1,7 @@
 
 function [estm,err] = main(dataNum)
 hold off;
+figure;
 init;
 membound = 0.15;
 sig = Sig{dataNum};
@@ -63,5 +64,4 @@ plot(estm(1:fnumber),'r*');
 legend('true heartrate','estimated heartrate');
 fprintf('Data set No %d: ',dataNum);
 err = printError(estm(1:fnumber)',hr(1:fnumber)/60);
-hold off;
 end
