@@ -1,8 +1,7 @@
-function [ hr,hrpeak ] = estimate_next( peak,estm,hrpeak, accClass, idx,bound)
+function [ hr,this_hrpeak ] = estimate_next( peak,estm,hrpeak, accClass, idx,bound)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 prev_hrpeak = hrpeak(idx-1);
 prev_hr = estm(idx-1);
-hrpeak = -1;
 init_glb;
 persistent count stillcount;
 if isempty(count)
@@ -44,6 +43,9 @@ if ~isempty(freqM)
     freqM = freqM(ppg1);
 end
 
+freqM = trendDecision(freqM,hrpeak,estm,idx);
+this_hrpeak = freqM;
+
 if prev_hr ~= freqM
     hr = freqM(1)*0.8 + prev_hr*0.2;
 else
@@ -61,6 +63,7 @@ end
 
 
 hr = accDecision(hr,prev_hr,accClass,idx);
+
 
 end
 
