@@ -1,6 +1,6 @@
 fnum = 24;
 r = 0.3;
-whichone = [1];
+whichone = [6];
 init;
 for i = whichone;
     pfsuspect(Sig{i},Hr{i},fnum,r);

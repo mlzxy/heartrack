@@ -2,7 +2,7 @@ init;
 %%% use az
 Center = C{3};
 aidx = 6;
-numlist = 1:12;
+numlist = 6;
 errlist = zeros(1,12);
 for i = numlist;
     [~,errlist(i)] = main(i);
@@ -15,7 +15,7 @@ for i = numlist;
         
         classList(j) = whichclass(mylpc(frame(aidx,:),order),Center);
     end
-    plot(classList*0.75,'blacko');
+    plot(classList,'blacko');
     legend(strcat('Use ACC! Data Set ',int2str(i)));
     hold off;
 end

@@ -1,14 +1,14 @@
 
 function [estm,err] = main(dataNum)
 hold off;
+init_glb;
 figure;
-init;
 membound = 0.15;
 sig = Sig{dataNum};
 hr = Hr{dataNum};
 PPG1 = 2;
 PPG2 = 3;
-
+ACCz = 6;
 %%%%%%%%%%%%%%
 r = [0.1,0.8,1.5];
 lowb = 0.5;
@@ -23,6 +23,7 @@ lenpg = 2;
 
 %%%%%%%%%%%%%%%%%%%%%%
 fnumber = frameNum(sig);
+accClass = zeros(1,fnumber);
 estm = zeros(1,fnumber);
 hrpeak = zeros(1,fnumber);
 %%%
@@ -31,6 +32,7 @@ for i = 1:fnumber
     lenr = length(r);
     frame = getFrame(sig,i);
     ppg = [frame(PPG1,:);frame(PPG2,:)];
+    accClass(i) = whichclass(mylpc(frame(ACCz,:),order),Center);
     ppg_m = cell(2,lenr);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     for j = 1:lenr
@@ -54,7 +56,7 @@ for i = 1:fnumber
     end
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    [estm(i),hrpeak(i)] = estimate(peaks,estm,hrpeak,i,membound);
+    [estm(i),hrpeak(i)] = estimate(peaks,estm,hrpeak,i,membound,accClass);
     
 end
 

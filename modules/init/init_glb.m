@@ -1,0 +1,1 @@
+global window Fs step Sig Hr dpath dhome dapath order K Center;

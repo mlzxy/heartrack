@@ -1,7 +1,10 @@
-function [ hr,hrpeak ] = estimate_next( peak,prev_hr,prev_hrpeak,bound )
+function [ hr,hrpeak ] = estimate_next( peak,estm,hrpeak, accClass, idx,bound)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+prev_hrpeak = hrpeak(idx-1);
+prev_hr = estm(idx-1);
+hrpeak = -1;
+init_glb;
 persistent count stillcount;
-global Fs window;
 if isempty(count)
     count = 1;
     stillcount = 1;
@@ -9,15 +12,11 @@ end
 count = count +1;
 ppg1 = 1;
 ppg2 = 2;
-if count == 21
+if count == 19
     1;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 peaktc = cell(2,3);
-
 hb = prev_hr + bound;
 lb = prev_hr - bound;
 
@@ -33,6 +32,7 @@ for i=1:size(peak,1)
         peaktc{i,j}.peakm = peakm;
     end
 end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% peaktc is the truncation of peak
 freqM = magDecision(peaktc);
@@ -43,26 +43,6 @@ magD = freqM;
 if ~isempty(freqM)
     freqM = freqM(ppg1);
 end
-
-
-
-
-
-hrpeak = 1;
-
-% if ~isempty(freqM)
-%     hrpeak = freqM;    
-%     if freqM == prev_hrpeak && prev_hrpeak < 1.5
-%         stillcount_Hrpeak = stillcount_Hrpeak + 1;
-%         if stillcount_Hrpeak >= 3
-%             stillcount_Hrpeak = 0;
-%             freqM = freqM + Fs/window/2;
-%         end
-%     end
-% else
-%     hrpeak = prev_hrpeak;
-% end
-
 
 if prev_hr ~= freqM
     hr = freqM(1)*0.8 + prev_hr*0.2;
@@ -78,6 +58,9 @@ else
         stillcount = 0;
     end
 end
+
+
+hr = accDecision(hr,prev_hr,accClass,idx);
 
 end
 

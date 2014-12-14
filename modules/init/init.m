@@ -1,4 +1,4 @@
-global window Fs step Sig Hr dpath dhome dapath order K;
+global window Fs step Sig Hr dpath dhome dapath order K Center;
 dhome = '/home/beviszhang/Documents/WorkSpace/newIEEE/data/';
 dpath = strcat(dhome,'alldata.mat');
 dapath = strcat(dhome,'accDataAll.mat');
@@ -9,3 +9,4 @@ load(dpath);
 load(dapath);
 K = 2;
 order = 10;
+Center = C{3};
