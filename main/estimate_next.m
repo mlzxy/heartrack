@@ -43,7 +43,7 @@ if ~isempty(freqM)
     freqM = freqM(ppg1);
 end
 
-freqM = trendDecision(freqM,hrpeak,estm,idx);
+
 this_hrpeak = freqM;
 
 if prev_hr ~= freqM
@@ -60,9 +60,11 @@ else
         stillcount = 0;
     end
 end
-
-
 hr = accDecision(hr,prev_hr,accClass,idx);
+
+
+%hr = trendDecision(freqM,hrpeak,estm,idx,freqC);
+
 
 
 end
