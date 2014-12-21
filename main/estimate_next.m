@@ -11,7 +11,7 @@ end
 count = count +1;
 ppg1 = 1;
 ppg2 = 2;
-if count == 19
+if count == 17
     1;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,7 +44,8 @@ if ~isempty(freqM)
 end
 
 
-this_hrpeak = freqM;
+this_hrpeak = 1;
+
 
 if prev_hr ~= freqM
     hr = freqM(1)*0.8 + prev_hr*0.2;
@@ -60,11 +61,13 @@ else
         stillcount = 0;
     end
 end
+
 hr = accDecision(hr,prev_hr,accClass,idx);
-
-
-%hr = trendDecision(freqM,hrpeak,estm,idx,freqC);
-
+% trendhr = trendDecision(hr,hrpeak,estm,idx,freqC);this_hrpeak = 1;
+% if trendhr ~= hr
+%     hr = trendhr;
+%     this_hrpeak = hr;
+% end
 
 
 end

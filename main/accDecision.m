@@ -25,6 +25,9 @@ function [ hr ] = accDecision( hr,prev_hr,accClass,idx )
     v = unique(accClass(idx-alen:idx-1));
     incm = Fs/window;
     if length(v) == 1 && v < accClass(idx)
+        if prev_hr < 1.5
+            incm = incm*1.5;
+        end
         if hr <= prev_hr+ Fs/window/3 
             hr = hr + incm;
         end

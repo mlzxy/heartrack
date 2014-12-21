@@ -1,4 +1,4 @@
-fnum = 24;
+fnum = 18;
 r = 0.3;
 whichone = [6];
 init;
