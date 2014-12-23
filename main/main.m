@@ -56,9 +56,11 @@ for i = 1:fnumber
     end
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    [estm(i),hrpeak(i)] = estimate(peaks,estm,hrpeak,i,membound,accClass);
+    [estm(i),hrpeak(i)] = estimate(peaks,estm,hrpeak,i,membound,accClass,frame);
     
 end
+clear estimate_first;
+clear estimate_next;
 figure;
 hold on;
 plot(hr(1:fnumber)/60,'b*');

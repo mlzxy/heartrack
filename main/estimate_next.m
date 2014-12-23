@@ -1,17 +1,20 @@
-function [ hr,this_hrpeak ] = estimate_next( peak,estm,hrpeak, accClass, idx,bound)
+function [ hr,this_hrpeak ] = estimate_next( peak,estm,hrpeak, accClass, idx,bound, frame)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 prev_hrpeak = hrpeak(idx-1);
 prev_hr = estm(idx-1);
 init_glb;
-persistent count stillcount;
+global Fs window;
+persistent count stillcount AccStimulus;
 if isempty(count)
     count = 1;
     stillcount = 1;
+    AccStimulus = -10;
 end
+
 count = count +1;
 ppg1 = 1;
 ppg2 = 2;
-if count == 17
+if count == 1
     1;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,13 +65,14 @@ else
     end
 end
 
-hr = accDecision(hr,prev_hr,accClass,idx);
-% trendhr = trendDecision(hr,hrpeak,estm,idx,freqC);this_hrpeak = 1;
-% if trendhr ~= hr
-%     hr = trendhr;
-%     this_hrpeak = hr;
-% end
 
+[hr, accRise] = accDecision(hr,estm,accClass,idx);
+if accRise 
+    AccStimulus = idx;
+end
+
+%%%%%%%%%%%%%%%%%
+hr = trendDecision(hr,estm,idx,AccStimulus);
 
 end
 

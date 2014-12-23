@@ -1,16 +1,16 @@
-function pfsuspect( sig,BPM0,n ,r)
+function pfsuspect( sig,BPM0,n ,r,c)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
   global window Fs
    
    if size(sig,1) > 1 && size(sig,2) > window
         frame = getFrame(sig,n);
-        ppg1 = frame(2,:);
+        ppg1 = frame(c,:);
    elseif size(sig,1) == 1
         ppg1 = sig;
    else
         frame = sig;
-        ppg1 = frame(2,:);
+        ppg1 = frame(c,:);
    end
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    
