@@ -1,8 +1,8 @@
-fnum = 22;
+fnum = 23;
 r = 1.5;
 ppg1 = 2;
 ppg2 = 3;
-whichone = [6];
+whichone = [10];
 init;
 %channel = ppg1;
 channel = ppg1;

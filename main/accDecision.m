@@ -1,12 +1,13 @@
-function [ hr,accRise ] = accDecision( hr,estm,accClass,idx )
+function [ hr,accRise ] = accDecision( hr,estm,accClass,idx)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     init_glb; 
     accRise = false;
     prev_hr = estm(idx-1);
-    global window;
+    global window Fs; 
     bound  = 0.2;
+    mean_len = 40;
     alen = 12;
     hrDiff = hr - prev_hr;
     if idx < alen+1
@@ -31,7 +32,7 @@ function [ hr,accRise ] = accDecision( hr,estm,accClass,idx )
             incm = incm*1.5;
             accRise = true;
         end
-        if prev_hr < mean(estm(1:idx-1))
+        if  prev_hr < mean(estm(1:idx-1)) && prev_hr < expRaiseThreshold(estm(1:idx-1))
              accRise = true;
         end
         if hr <= prev_hr+ Fs/window/3 

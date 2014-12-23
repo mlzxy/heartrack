@@ -3,18 +3,18 @@ function [ hr,this_hrpeak ] = estimate_next( peak,estm,hrpeak, accClass, idx,bou
 prev_hrpeak = hrpeak(idx-1);
 prev_hr = estm(idx-1);
 init_glb;
-global Fs window;
 persistent count stillcount AccStimulus;
 if isempty(count)
     count = 1;
     stillcount = 1;
-    AccStimulus = -10;
+    AccStimulus = -10000;
+    accStimuLog = [];
 end
 
 count = count +1;
 ppg1 = 1;
 ppg2 = 2;
-if count == 1
+if count == 25
     1;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
