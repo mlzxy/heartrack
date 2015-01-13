@@ -1,5 +1,5 @@
 
-function [estm,err] = main(dataNum)
+function [estm] = main(dataNum,len)
 
 init_glb;
 
@@ -22,7 +22,13 @@ lenpg = 2;
 
 
 %%%%%%%%%%%%%%%%%%%%%%
-fnumber = frameNum(sig);
+if nargin == 1
+    fnumber = frameNum(sig);
+else
+    fnumber = len;
+end
+
+
 accClass = zeros(1,fnumber);
 estm = zeros(1,fnumber);
 hrpeak = zeros(1,fnumber);
@@ -54,19 +60,24 @@ for i = 1:fnumber
             peaks{k,j} = temp;
         end
     end
-
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     [estm(i),hrpeak(i)] = estimate(peaks,estm,hrpeak,i,membound,accClass,frame);
     
 end
 clear estimate_first;
 clear estimate_next;
-figure;
-hold on;
-plot(hr(1:fnumber)/60,'b*');
-plot(estm(1:fnumber),'r*');
-legend('true heartrate','estimated heartrate');
-fprintf('Data set No %d: ',dataNum);
-err = printError(estm(1:fnumber)',hr(1:fnumber)/60);
-hold off;
+
+if nargin == 1
+    figure;
+    hold on;
+    plot(hr(1:fnumber)/60,'b*');
+    plot(estm(1:fnumber),'r*');
+    legend('true heartrate','estimated heartrate');
+    fprintf('Data set No %d: ',dataNum);
+    err = printError(estm(1:fnumber)',hr(1:fnumber)/60);
+    hold off;
+end
+
+
 end

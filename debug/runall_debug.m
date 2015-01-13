@@ -2,7 +2,7 @@ init;
 %%% use az
 Center = C{3};
 aidx = 6;
-numlist = 1:12;
+numlist = 6;
 errlist = zeros(1,12);
 for i = numlist;
     [~,errlist(i)] = main(i);
