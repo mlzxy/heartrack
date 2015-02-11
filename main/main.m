@@ -1,7 +1,7 @@
 
 function [estm,err,f] = main(dataNum,len)
 
-init_glb;
+global window Fs step Sig Hr  order K Center Tig visible;
 
 membound = 0.15;
 sig = Sig{dataNum};

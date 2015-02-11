@@ -1,1 +1,1 @@
-global window Fs step Sig Hr  order K Center Tig;
+global window Fs step Sig Hr  order K Center Tig visible;
