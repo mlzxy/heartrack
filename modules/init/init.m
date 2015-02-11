@@ -10,4 +10,5 @@ step = 250;
 K = 2;
 order = 10;
 Center = accData.C{3};
-visible = true;
+visible = true; %% show graph or not
+saveImgTo = '/home/xyzhang/Documents/WorkSpace/newIEEE/doc/figs/';

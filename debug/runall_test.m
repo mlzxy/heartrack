@@ -1,6 +1,6 @@
 init;
 num = 10;
-path = '/home/xyzhang/Documents/Sp Cup/newIEEE/doc/figs/test/';
+path = strcat(saveImgTo,'test/');
 for i = 1:num;
     [~,f] = main_test(i);
     switch(i)
