@@ -1,4 +1,4 @@
-fnum = 23;
+fnum = 1;
 r = 1.5;
 ppg1 = 2;
 ppg2 = 3;
@@ -7,7 +7,7 @@ init;
 %channel = ppg1;
 channel = ppg1;
 for i = whichone;
-    pfsuspect(Sig{i},Hr{i},fnum,r,channel);
+    pfsuspect(Sig{i},Hr{i},fnum,r,chan;
     legend(strcat('Data set:',int2str(i),' Frame num:',int2str(fnum),'  after wavelet'));
     fsuspect(Sig{i},Hr{i},fnum);
     legend(strcat('Data set:',int2str(i),' Frame num:',int2str(fnum),'  raw'));

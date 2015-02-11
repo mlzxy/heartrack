@@ -1,5 +1,5 @@
 
-function [estm] = main(dataNum,len)
+function [estm,err,f] = main(dataNum,len)
 
 init_glb;
 
@@ -14,7 +14,7 @@ r = [0.1,0.8,1.5];
 lowb = 0.5;
 highb = 3;
 %%%%%%%%%%%%%%
-
+lenr = length(r);
 
 %%%%%%%%%%%%%%%%%%%%%%
 
@@ -35,7 +35,7 @@ hrpeak = zeros(1,fnumber);
 %%%
 %fnumber = 100;
 for i = 1:fnumber
-    lenr = length(r);
+    
     frame = getFrame(sig,i);
     ppg = [frame(PPG1,:);frame(PPG2,:)];
     accClass(i) = whichclass(mylpc(frame(ACCz,:),order),Center);
@@ -69,11 +69,17 @@ clear estimate_first;
 clear estimate_next;
 
 if nargin == 1
-    figure;
+    if exist('visible','var') && visible        
+        f = figure;
+    else
+        f = figure('visible','off');
+    end
     hold on;
+    axis([1,fnumber,0,3]);
     plot(hr(1:fnumber)/60,'b*');
     plot(estm(1:fnumber),'r*');
-    legend('true heartrate','estimated heartrate');
+   
+    legend('true heartrate','estimated heartrate','Location','SouthEast');
     fprintf('Data set No %d: ',dataNum);
     err = printError(estm(1:fnumber)',hr(1:fnumber)/60);
     hold off;

@@ -1,5 +1,4 @@
 init;
-load('/home/beviszhang/Documents/WorkSpace/newIEEE/data/alldata.mat');
 whichone = 1:12;
 ax = 4;
 ay = 5;
@@ -44,5 +43,5 @@ for i = 1:length(Alpcell)
 end
 
 
-acellpath = strcat(dhome,'accDataAll.mat');
+acellpath = 'accDataAll.mat';
 save(acellpath, 'Acell' ,'acx' ,'acy', 'acz' ,'acm','Alpcell','Aclucell','C');

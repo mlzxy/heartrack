@@ -1,6 +1,6 @@
-init;
-num = 12;
-errlist = zeros(1,num);
-for i = 1:num;
-    [~,errlist(i)] = main(i);
-end
+visible = false;
+fprintf('Run the training data:\n')
+runall_train;
+fprintf('\nRun the Test data:\n')
+runall_test;
+visible = true;
