@@ -5,9 +5,7 @@ I just Finish 2015 IEEE Signal Processing Cup, and here is an Heart Rate Trackin
 
 
 **Notice**
-> This is **Not** the algorithm we used in the competition, which gave  better result than this one, but in the same time, more complex and less explainable. 
->
-> This is my homebrew algorithm...... :(
+> This is **Not** the exact algorithm we used in the paper: [http://bit.ly/1TjFB67](http://bit.ly/1TjFB67), which gave  better result than this one, but the idea is the same.
 
 <br>
 <br>
